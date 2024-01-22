@@ -70,26 +70,10 @@ exports.postAddProduct = (req, res, next) => {
   product
     .save()
     .then(result => {
-      // console.log(result);
       console.log('Created Product');
       res.redirect('/admin/products');
     })
     .catch(err => {
-    //   return res.status(500).render('admin/edit-product', {
-    //     pageTitle: 'Add Product',
-    //     path: '/admin/add-product',
-    //     editing: false,
-    //     hasErrors: true,
-    //     product: {
-    //       title: title,
-    //       imageUrl: imageUrl,
-    //       price: price,
-    //       description: description
-    //     },
-    //     errorMessage: 'Database operation failed, please try again',
-    //     validationErrors: errors.array()
-    //   });
-    // res.redirect('/500');
         const error = new Error(err);
         error.httpStatusCode = 500;
         return next(error);
@@ -170,10 +154,9 @@ exports.postEditProduct = (req, res, next) => {
     })
     .catch(err => {
     // res.redirect('/500');
-
       const error = new Error(err);
-        error.httpStatusCode = 500;
-        return next(error);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 

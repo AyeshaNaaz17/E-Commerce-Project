@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const stripe = require('stripe')('sk_test_51OaiyxSFD1zCtwAlcK0Y9PLReLSsjI6QzhtwrJBaJ9FIcKhQUs8ZJAgXsRXR49zp0ep16yWITuuL3BZvkPGmuWp300C43Z6Ydt');
+const stripe = require('stripe')('<SECRET KEY>');
 
 const PDFDocument = require('pdfkit');
 
@@ -303,25 +303,8 @@ exports.getInvoice = (req, res, next) => {
       });
 
       pdfDoc.fontSize(24).text('---------')
-
       pdfDoc.fontSize(20).text('Total Price: $' + totalPrice);
-
       pdfDoc.end();
-
-      // takes long time for bigger files
-      // fs.readFile(invoicePath, (err, data) => {
-      //   if (err) {
-      //     return next(err);
-      //   }
-      //   res.setHeader('Content-Type', 'application/pdf');
-      //   res.setHeader('Content-Disposition', 'inline; filename="' + invoicePath + '"');
-      //   res.send(data);
-      // });
-
-      // const file = fs.createReadStream(invoicePath);
-        // res.setHeader('Content-Type', 'application/pdf');
-        // res.setHeader('Content-Disposition', 'inline; filename="' + invoicePath + '"');
-        // file.pipe(res);
     })
     .catch(err => next(err));
 };
